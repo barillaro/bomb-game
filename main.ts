@@ -33,7 +33,7 @@ let myScore = 0
 
 // === Configuration variables ===
 // Set the number of players!
-let players = 4;
+let players = 15;
 // Set your ID (Must be unique in your group)
 let myID = randint(1, players); // Change the random value for something fix
 // Set the difficulty of the game: "easy", (more to come later)
@@ -46,34 +46,32 @@ let defuseCodeList = ["A"];
 
 // === This executes at the beginning ===
 // Configure the radio Group
-// TODO: radio.setGroup(use the radioGroup here)
+radio.setGroup(radioGroup)
 // start the game!
-// TODO: Call the startGame function
+startGame()
 
 
 // === Helper: Show current status (ID + Score) ===
 function showStatus() {
     // Print the label "ID:" and the ID on the display
-    // TODO: show ID on the LED display
-
+    basic.showString("ID:" + myID)
     // Print the label "S:" and the score on the display
-    // TODO: show your score on the LED display
-
+    basic.showString("S:" + myScore)
 }
 
 // This function configures the device to end the game
 function endGame() {
     // Set the flag gameOver 
-    // TODO: set the flag variable gameOver = true
+    gameOver = true
     // Deactivate any bomb
-    // TODO: set the flag variable bombActive = false
+    bombActive = false
     //Stop the sound
     music.stopAllSounds()
     // Show the NO icon during 1 second (a visual reference)
     basic.showIcon(IconNames.No)
     basic.pause(1000)
     // show the final score on screen
-    // TODO: call the showStatus function
+    showStatus()
 }
 
 // === Receive Radio Message ===
