@@ -3,7 +3,7 @@
  * Description: Core logic and custom extensions for micro:bit multiplayer interaction.
  * 
  * File: main.ts
- * Contains: Main logic. T1.
+ * Contains: Main logic. T2: Radio Handler. processBombMessage. Defuse
  * 
  * Author: Sebastian Barillaro
  * Date: 2025-06-01
@@ -82,6 +82,7 @@ radio.onReceivedString(handleRadioMessage)
 function handleRadioMessage(message: string) {
     // If the game is over, we do nothing (return)
     // TODO: if (check flag if game is over) 
+    if (gameOver == true)
     {
         return;
     }
@@ -90,6 +91,7 @@ function handleRadioMessage(message: string) {
     if (message == "gameover") {
         // The message received requires to end the game
         // TODO: Call the endGame function
+        endGame()
         return;
     }
 
@@ -97,6 +99,7 @@ function handleRadioMessage(message: string) {
     if (isBombMessage(message) == true) {
         // The message is of type bomb! Process the bomb message!
         // TODO: Call the processBombMessage function!
+        processBombMessage(message)
     }
 }
 
@@ -112,15 +115,17 @@ function processBombMessage(message: string) {
 
     // All players get a point for surviving this round
     // TODO: Increment myScore by 1
+    myScore += 1
 
     // Short alert to all
     // TODO: basic.showString( Show a visual notification "!" )
+    basic.showString("!")
 
     //Check if the bomb was sent to me :-O
     if (mTargetId == myID) {
         // Caramba!! I have the bomb!
         // mark the flag bomb active!
-        // TODO: Mark bombActive = true
+        bombActive = true
         // save the message data:
         defuseCode = mCode
         defuseTime = mTime
@@ -130,9 +135,11 @@ function processBombMessage(message: string) {
 
         // Start the countdown during "defuseTime" seconds
         // TODO: call countdown() with defuseTime
+        countdown(defuseTime)
 
         // The countdown function ended. Check if you defused the bomb (or not) 
         // TODO: Check if bombActive == true
+        if (bombActive == true)
         {
             // The bomb remains active. I am very sorry for you >:-D
             explodeBomb() // booom!!!
@@ -166,20 +173,24 @@ input.onButtonPressed(Button.A, function () {
 
 // === Helper: Handle Defuse Attempt ===
 function Defuse(codePressed: string) {
-    // TODO: Check if game is over. if (gameOver == true) 
+    // TODO: Check if game is over. 
+    if (gameOver == true) 
     { // If the game is over, there is nothing to do
         return // end of function
     }
 
     // The game is not over. Check if the bomb is active
-    // TODO: Check if game is over. if (bombActive == true) 
+    // TODO: Check if game is over. 
+    if (bombActive == true) 
     {   // The bomb is active! 
         // Check if defused correctly
-        // TODO: Check if codePressed matches defuseCode. if (defuseCode == codePressed)
+        // TODO: Check if codePressed matches defuseCode. 
+        if (defuseCode == codePressed)
         {// bomb defused correctly. Well done!
             defuseSuccess()
         }
-        // TODO: else 
+        // TODO: 
+        else 
         {
             // bomb is not defused. I am very sorry for you :-p
             explodeBomb()
