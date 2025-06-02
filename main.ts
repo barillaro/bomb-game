@@ -3,7 +3,7 @@
  * Description: Core logic and custom extensions for micro:bit multiplayer interaction.
  * 
  * File: main.ts
- * Contains: Main logic. T4: Extreme!!! + sendBomb
+ * Contains: Main logic. T5: chaos (bonus)
  * 
  * Author: Sebastian Barillaro
  * Date: 2025-06-01
