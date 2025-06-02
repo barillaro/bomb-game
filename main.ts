@@ -3,7 +3,7 @@
  * Description: Core logic and custom extensions for micro:bit multiplayer interaction.
  * 
  * File: main.ts
- * Contains: Main logic. T3: Button B, Pin 0, Pin 1, Pin 2
+ * Contains: Main logic. T4: Extreme!!! + sendBomb
  * 
  * Author: Sebastian Barillaro
  * Date: 2025-06-01
@@ -37,7 +37,7 @@ let players = 15;
 // Set your ID (Must be unique in your group)
 let myID = randint(1, players); // Change the random value for something fix
 // Set the difficulty of the game: "easy", (more to come later)
-let difficulty = "easy";
+let difficulty = "extreme";
 // Set the defuse code list
 let defuseCodeList = ["A", "B", "P0", "P1", "P2"];
 // Optionally, you can extend the list of codes to include more codes
@@ -223,13 +223,13 @@ function sendBomb() {
     // Choose a target to send the bomb
     let targetID
     do { //TODO: Set the range of random target ID
-        targetID = randint(0, 0)
+        targetID = randint(1, players)
     } while (targetID == myID); // This checks that we don't throw the bomb to ourselves
 
     // Choose a random defuse code index
     let defuseCodeIndex = randint(0, defuseCodeList.length - 1)
     // TODO: Use the defuseCodeIndex to pick a defuse code (from the list of codes)
-    let defuseCode = defuseCodeList[0]
+    let defuseCode = defuseCodeList[defuseCodeIndex]
 
     // Adjust defuse time for extreme difficulty
     if (difficulty == "extreme") {
@@ -246,11 +246,11 @@ function sendBomb() {
     // Assembly all the parts in a single message
     // TODO: concatenate the parts into a single message.
     //       Intercalate : in between as a separator
-    message = "bomb:" // concatenate + ":" + the ":" +  parts ;-)
+    message = "bomb:" + targetID + ":" + defuseCode + ":" + defuseTime
 
     // send the message by radio!
     // TODO: use the message to broadcast by radio
-    radio.sendString("your bomb here")
+    radio.sendString(message)
 }
 
 
