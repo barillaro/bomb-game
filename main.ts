@@ -3,7 +3,7 @@
  * Description: Core logic and custom extensions for micro:bit multiplayer interaction.
  * 
  * File: main.ts
- * Contains: Main logic. T2: Radio Handler. processBombMessage. Defuse
+ * Contains: Main logic. T3: Button B, Pin 0, Pin 1, Pin 2
  * 
  * Author: Sebastian Barillaro
  * Date: 2025-06-01
@@ -39,7 +39,7 @@ let myID = randint(1, players); // Change the random value for something fix
 // Set the difficulty of the game: "easy", (more to come later)
 let difficulty = "easy";
 // Set the defuse code list
-let defuseCodeList = ["A"];
+let defuseCodeList = ["A", "B", "P0", "P1", "P2"];
 // Optionally, you can extend the list of codes to include more codes
 // defuseCodeList = ["A", "B", "P0", "P1", "P2"]
 
@@ -161,15 +161,24 @@ input.onButtonPressed(Button.A, function () {
 })
 
 // TODO: add an input function to process the Button B
-
+input.onButtonPressed(Button.B, function () {
+    // Try to defuse using the code B
+    Defuse("B")
+})
 // TODO: add an input function to process the Pin 0
-// input.onPinPressed(TouchPin.P0, function () {
-//     Defuse("P0")
-// })
+ input.onPinPressed(TouchPin.P0, function () {
+     Defuse("P0")
+ })
 
 // TODO: add an input function to process the Pin 1
+input.onPinPressed(TouchPin.P1, function () {
+    Defuse("P1")
+})
 
 // TODO: add an input function to process the Pin 2
+input.onPinPressed(TouchPin.P2, function () {
+    Defuse("P2")
+})
 
 // === Helper: Handle Defuse Attempt ===
 function Defuse(codePressed: string) {
