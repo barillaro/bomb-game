@@ -3,7 +3,7 @@
  * Description: Core logic and custom extensions for micro:bit multiplayer interaction.
  * 
  * File: main.ts
- * Contains: Main logic. Initial template.
+ * Contains: Main logic. T1.
  * 
  * Author: Sebastian Barillaro
  * Date: 2025-06-01
